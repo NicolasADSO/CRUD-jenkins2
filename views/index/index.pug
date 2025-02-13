@@ -1,0 +1,23 @@
+extends /layout/layout
+
+block content
+  .container.mt-5
+    h2.text-center.mb-4 Productos Disponibles
+    if productos && productos.length > 0
+      .row
+        each producto in productos  
+          .col-md-4.mb-4
+            .card
+              img.card-img-top(src=producto.imagen, alt=producto.nombre)
+              .card-body
+                h5.card-title= producto.nombre
+                p.card-text Precio: $ #{producto.precio}
+                .d-flex.justify-content-center.gap-1
+                  a.btn.btn-info.btn-sm(href=`/actualizar/${producto.id}`)
+                    i.bi.bi-pencil-square Editar
+                  form(action=`/delete/${producto.id}` method="POST" onsubmit="return confirm('¿Estas seguro de eliminar este producto?')")
+                    input(type="hidden" name="_method" value="DELETE")
+                    button.btn.btn-danger.btn-sm(type="submit")
+                      i.bi.bi-trash Eliminar
+    else 
+      .alert.alert-warning.text-center No hay productos disponibles.

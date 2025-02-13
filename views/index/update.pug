@@ -1,0 +1,27 @@
+extends /layout/layout
+
+block content
+ .container.mt-5
+      .row.justify-content-center
+        .col-md-6
+          .card
+            .card-header
+              h3.text-center Actualizar #{producto.nombre}
+            include ../partials/alerts
+            .card-body
+              form(action="", method="POST")
+                imput(type="hidden", name="_method", value="PUT")
+                .mb-3 
+                  label(for="nombre").form-label Nombre 
+                  input(type="text", name="nombre", id="nombre", class="form-control", value= producto ? producto.nombre : '')
+                .mb-3
+                  label(for="descripcion").form-label Descripcion
+                  input(type="text", id="descripcion", name="descripcion", value= producto ? producto.descripcion : '').form-control
+                .mb-3
+                  label(for="precio").form-label Precio
+                  input(type="text", id="precio", name="precio", value= producto ? producto.precio : '').form-control
+                .mb-3 
+                  label(for="nombre").form-label Imagen 
+                  input(type="text", name="imagen", id="Imagen", class="form-control", value= producto ? producto.imagen : '')
+                .d-grid
+                  button(type="submit", href="/").btn.btn-primary Actualizar

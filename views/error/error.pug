@@ -1,0 +1,11 @@
+extends /layout/layout
+block content
+  section.container.pt-5 
+    .row 
+      .text-center
+        h1.border.p-3.shadow-sm= title  
+          p.mt-3.fs-4= message
+          if Error && Error.stack
+            pre #{Error.stack}
+        a.text-decoration-none.text-black-50(href="/")
+          | Back Home 

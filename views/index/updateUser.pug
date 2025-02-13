@@ -1,0 +1,27 @@
+extends /layout/layout
+
+block content
+ .container.mt-5
+      .row.justify-content-center
+        .col-md-6
+          .card
+            .card-header
+              h3.text-center Actualiza tu cuenta
+            include ../partials/alerts
+            .card-body
+              form(action="" method="POST")
+                input(type="hidden" name="_method" value="PUT")
+                .mb-3 
+                  label(for="nombre").form-label Nombre de usuario
+                  input(type="text", name="nombre", id="nombre", value= customer ? customer.nombre : '').form-control
+                .mb-3
+                  label(for="email").form-label Correo Electrónico
+                  input(type="text", id="email", name="email", value= customer ? customer.email : '' ).form-control
+                .mb-3
+                  label(for="password").form-label Contraseña
+                  input(type="password", id="password", name="password", value= customer ? customer.password : '').form-control
+                .mb-3
+                  label(for="password").form-label Direccion
+                  input(type="text", id="direccion", name="direccion", value= customer ? customer.direccion : '').form-control
+                .d-grid
+                  button(type="submit").btn.btn-primary Actualizar
