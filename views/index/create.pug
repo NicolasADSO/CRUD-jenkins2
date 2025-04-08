@@ -1,26 +1,26 @@
 extends /layout/layout
 
 block content
- .container.mt-5
-      .row.justify-content-center
-        .col-md-6
-          .card
-            .card-header
-              h3.text-center Crea un nuevo producto
-            include ../partials/alerts
-            .card-body
-              form(action="/crear", method="POST")
-                .mb-3 
-                  label(for="nombre").form-label Nombre 
-                  input(type="text", name="nombre", id="nombre", class="form-control")
-                .mb-3
-                  label(for="descripcion").form-label Descripcion
-                  input(type="text", id="descripcion", name="descripcion" ).form-control
-                .mb-3
-                  label(for="precio").form-label Precio
-                  input(type="text", id="precio", name="precio").form-control
-                .mb-3 
-                  label(for="nombre").form-label Imagen 
-                  input(type="text", name="imagen", id="Imagen", class="form-control")
-                .d-grid
-                  button(type="submit", href="/").btn.btn-primary Crear
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-6
+        .card.shadow-lg.rounded-4
+          .card-header.bg-primary.text-white.text-center.py-3.rounded-top
+            h3.mb-0 Crea un nuevo producto
+          include ../partials/alerts
+          .card-body.px-4.py-4
+            form(action="/crear", method="POST")
+              .mb-3
+                label(for="nombre").form-label Nombre 
+                input(type="text", name="nombre", id="nombre", class="form-control form-control-lg", placeholder="Ingrese el nombre del producto")
+              .mb-3
+                label(for="descripcion").form-label Descripción
+                input(type="text", id="descripcion", name="descripcion", class="form-control form-control-lg", placeholder="Ingrese una descripción")
+              .mb-3
+                label(for="precio").form-label Precio
+                input(type="text", id="precio", name="precio", class="form-control form-control-lg", placeholder="Ingrese el precio")
+              .mb-3
+                label(for="imagen").form-label Imagen 
+                input(type="text", name="imagen", id="imagen", class="form-control form-control-lg", placeholder="URL de la imagen")
+              .d-grid.mt-4
+                button(type="submit").btn.btn-lg.btn-primary.fw-bold Crear

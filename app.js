@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(methodOverride)
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'Ancasa0719',
   resave: false,
   saveUninitialized: true,
   cookie: {secure: process.env.NODE_ENV === 'production'}

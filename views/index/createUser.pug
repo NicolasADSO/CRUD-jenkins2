@@ -1,29 +1,29 @@
 extends /layout/layout
 
 block content
- .container.mt-5
-      .row.justify-content-center
-        .col-md-6
-          .card
-            .card-header
-              h3.text-center Crea tu cuenta
-            include ../partials/alerts
-            .card-body
-              form(action="/nuevoUsuario", method="POST")
-                .mb-3 
-                  label(for="nombre").form-label Nombre de usuario
-                  input(type="text", name="nombre", id="nombre", value= customer ? customer.nombre : '').form-control
-                .mb-3
-                  label(for="email").form-label Correo Electrónico
-                  input(type="text", id="email", name="email", value= customer ? customer.email : '' ).form-control
-                .mb-3
-                  label(for="password").form-label Direccion
-                  input(type="text", id="direccion", name="direccion", value= customer ? customer.direccion : '').form-control
-                .mb-3
-                  label(for="password").form-label Contraseña
-                  input(type="password", id="password", name="password", value= customer ? customer.password : '').form-control
-                .d-grid
-                  button(type="submit").btn.btn-primary Crear cuenta
-            .card-footer.text-center
-              p Ya tienes una cuenta 
-                a(href="/") Inicia Sesión
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-6
+        .card.shadow-lg.rounded-4
+          .card-header.bg-primary.text-white.text-center.py-3.rounded-top
+            h3.mb-0 Crea tu cuenta
+          include ../partials/alerts
+          .card-body.px-4.py-4
+            form(action="/nuevoUsuario", method="POST")
+              .mb-3 
+                label(for="nombre").form-label Nombre de usuario
+                input(type="text", name="nombre", id="nombre", value= customer ? customer.nombre : '', class="form-control form-control-lg", placeholder="Ingrese su nombre de usuario")
+              .mb-3
+                label(for="email").form-label Correo Electrónico
+                input(type="text", id="email", name="email", value= customer ? customer.email : '', class="form-control form-control-lg", placeholder="Ingrese su correo electrónico")
+              .mb-3
+                label(for="direccion").form-label Dirección
+                input(type="text", id="direccion", name="direccion", value= customer ? customer.direccion : '', class="form-control form-control-lg", placeholder="Ingrese su dirección")
+              .mb-3
+                label(for="password").form-label Contraseña
+                input(type="password", id="password", name="password", value= customer ? customer.password : '', class="form-control form-control-lg", placeholder="Ingrese su contraseña")
+              .d-grid.mt-4
+                button(type="submit").btn.btn-lg.btn-primary.fw-bold Crear cuenta
+          .card-footer.text-center.py-3
+            p.mb-0 Ya tienes una cuenta? 
+              a(href="/").fw-bold.text-primary Inicia Sesión

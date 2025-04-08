@@ -2,37 +2,29 @@ extends /layout/layout
 
 block content
   .container.mt-5
-      h2.text-center.mb-4 Usuarios Registrados
-      if customers && customers.length > 0
-        table.table.table-striped.table-hover
-          thead
-            tr
-              th ID
-              th Nombre
-              th Correo Electrónico
-              th Direccion 
-              th Acciones
-          tbody
-            each customer in customers  
-              tr
-                th= customer.id
-                th= customer.nombre
-                th= customer.email
-                th= customer.direccion 
-                th.d-flex.justify-content-center.gap-1
-                  a.btn.btn-info.btn-sm(href=`/admin/actualizarUsuario/${customer.id}`)
-                    i.bi.bi-pencil-square
-                  form(action=`/delete/${customer.id}` method="POST" onsubmit="return confirm('¿Estas seguro de eliminar el cliente?')")
-                    input(type="hidden" name="_method" value="DELETE")
-                    button.btn.btn-danger.btn-sm(type="submit")
-                      i.bi.bi-trash 
-      else 
-        table.table.table-striped.table-hover
-          thead
-            tr
-              th ID
-              th Nombre
-              th Correo Electrónico
-          tbody
-            tr 
-              td.text-center(colspan="7") La Tabla esta vacia.
+    h2.text-center.mb-4.text-primary Usuarios Registrados
+    if customers && customers.length > 0
+      table.table.table-striped.table-hover.table-bordered.rounded-3.shadow-sm
+        thead.class="bg-primary text-white"
+          tr.text-center
+            th ID
+            th Nombre
+            th Correo Electrónico
+            th Dirección
+            th Acciones
+        tbody
+          each customer in customers  
+            tr.text-center
+              td= customer.id
+              td= customer.nombre
+              td= customer.email
+              td= customer.direccion 
+              td.d-flex.justify-content-center.gap-2
+                a.btn.btn-info.btn-sm(href=`/admin/actualizarUsuario/${customer.id}` title="Editar usuario")
+                  i.bi.bi-pencil-square
+                form(action=`/delete/${customer.id}` method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este cliente?')")
+                  input(type="hidden" name="_method" value="DELETE")
+                  button.btn.btn-danger.btn-sm(type="submit" title="Eliminar usuario")
+                    i.bi.bi-trash 
+    else 
+      .alert.alert-warning.text-center No hay usuarios registrados.

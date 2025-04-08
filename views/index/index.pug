@@ -2,22 +2,24 @@ extends /layout/layout
 
 block content
   .container.mt-5
-    h2.text-center.mb-4 Productos Disponibles
+    h2.text-center.mb-4.pb-2.border-bottom Productos Disponibles
     if productos && productos.length > 0
       .row
         each producto in productos  
           .col-md-4.mb-4
-            .card
-              img.card-img-top(src=producto.imagen, alt=producto.nombre)
-              .card-body
+            .card.shadow-lg.rounded-4
+              img.card-img-top(src=producto.imagen, alt=producto.nombre, style="height: 200px; object-fit: cover;")
+              .card-body.text-center
                 h5.card-title= producto.nombre
                 p.card-text Precio: $ #{producto.precio}
-                .d-flex.justify-content-center.gap-1
-                  a.btn.btn-info.btn-sm(href=`/actualizar/${producto.id}`)
-                    i.bi.bi-pencil-square Editar
-                  form(action=`/delete/${producto.id}` method="POST" onsubmit="return confirm('¿Estas seguro de eliminar este producto?')")
-                    input(type="hidden" name="_method" value="DELETE")
-                    button.btn.btn-danger.btn-sm(type="submit")
-                      i.bi.bi-trash Eliminar
+                .d-flex.justify-content-center.gap-2.mt-3
+                  a.btn.btn-outline-primary.btn-sm.d-flex.align-items-center(href=`/actualizar/${producto.id}`)
+                    i.bi.bi-pencil-square.me-1
+                    | Editar
+                  form(action=`/delete/${producto.id}`, method="POST", onsubmit="return confirm('¿Estás seguro de eliminar este producto?')")
+                    input(type="hidden", name="_method", value="DELETE")
+                    button.btn.btn-outline-danger.btn-sm.d-flex.align-items-center(type="submit")
+                      i.bi.bi-trash.me-1
+                      | Eliminar
     else 
-      .alert.alert-warning.text-center No hay productos disponibles.
+      .alert.alert-warning.text-center.p-3.rounded-3.shadow-sm No hay productos disponibles.
