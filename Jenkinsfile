@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clonar código') {
             steps {
-                git 'URL_DEL_REPOSITORIO'
+               git url: 'https://github.com/NicolasADSO/CRUD.git', branch: 'main'
             }
         }
 
