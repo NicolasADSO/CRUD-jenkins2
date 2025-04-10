@@ -4,19 +4,22 @@ pipeline {
     stages {
         stage('Clonar código') {
             steps {
-               git url: 'https://github.com/NicolasADSO/CRUD.git', branch: 'main'
+                git url: 'https://github.com/NicolasADSO/CRUD.git', branch: 'main'
             }
         }
 
         stage('Construir imagen Docker') {
             steps {
-                sh 'docker build -t crud-app .'
+                sh 'docker build -t tienda-app .'
             }
         }
 
-        stage('Levantar contenedores') {
+        stage('Levantar contenedores con Docker Compose') {
             steps {
-                sh 'docker-compose up -d'
+                sh '''
+                docker-compose down || true
+                docker-compose up -d
+                '''
             }
         }
     }
