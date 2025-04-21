@@ -12,8 +12,6 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
-    volumes:
-      - .:/app
     command: ["node", "app.js"]
     depends_on:
       - db
@@ -29,8 +27,6 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4000
-    volumes:
-      - .:/app
     command: ["node", "app.js"]
     depends_on:
       - db
