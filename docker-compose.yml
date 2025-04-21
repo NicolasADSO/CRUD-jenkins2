@@ -1,60 +1,52 @@
 version: '3.8'
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: app_3000
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    volumes:
+      - .:/app
+    command: ["node", "app.js"]
+    depends_on:
+      - db
+
+  app2:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: app_4000
+    restart: always
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+    volumes:
+      - .:/app
+    command: ["node", "app.js"]
+    depends_on:
+      - db
+
   db:
     image: mysql:8
     container_name: mysql_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: "Ancasa0719"
-      MYSQL_DATABASE: "tienda"
-      MYSQL_PASSWORD: "Ancasa0719"
+      MYSQL_ROOT_PASSWORD: Ancasa0719
+      MYSQL_DATABASE: tienda
+      MYSQL_PASSWORD: Ancasa0719
     ports:
       - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
-  
-  app:
-    image: tienda-app
-    container_name: mi_app
-    restart: always
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    environment:
-      DB_HOST: "db"
-      DB_PORT: "3306"
-      DB_USER: "root"
-      DB_PASS: "Ancasa0719"
-      DB_DATABASE: "tienda"
-      DB_CONNECTION_LIMIT: "10"
-      PORT: "3000"
-      SESSION_SECRET: "0d2501883e47e4f5b177514ba874e31e15e8aa72ca15668130ffbef045f1216b"
-    volumes:
-      - .:/app
-    command: ["npm", "start"]
-
-  app2:
-    image: tienda-app
-    container_name: mi_app_2
-    restart: always
-    ports:
-      - "4000:3000"
-    depends_on:
-      - db
-    environment:
-      DB_HOST: "db"
-      DB_PORT: "3306"
-      DB_USER: "root"
-      DB_PASS: "Ancasa0719"
-      DB_DATABASE: "tienda"
-      DB_CONNECTION_LIMIT: "10"
-      PORT: "3000"
-      SESSION_SECRET: "0d2501883e47e4f5b177514ba874e31e15e8aa72ca15668130ffbef045f1216b"
-    volumes:
-      - .:/app
-    command: ["npm", "start"]
 
 volumes:
   db_data:

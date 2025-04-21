@@ -115,6 +115,7 @@ class productControllers{
             return res.render('index/update',{
                 title: 'Actualizar producto',
                 producto:{
+                    id: idProduct,
                     nombre: productExist[0].nombre,
                     precio: productExist[0].precio,
                     imagen: productExist[0].imagen,
@@ -206,10 +207,10 @@ class productControllers{
             console.log(result)
 
             if(result.affectedRows > 0){
-                res.flash('Success', 'El producto fue creado exitosamente');
+                res.flash('success', 'El producto fue actualizado exitosamente');
                 return res.redirect('/');
             }else{
-                res.flash('error', 'No se pudo crear el producto');
+                res.flash('error', 'No se pudo actualizar el producto');
                 return res.redirect('/');
             }
 

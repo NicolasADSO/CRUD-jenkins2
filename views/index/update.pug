@@ -9,8 +9,7 @@ block content
             h3.mb-0 Actualizar #{producto.nombre}
           include ../partials/alerts
           .card-body.px-4.py-4
-            form(action="", method="POST")
-              input(type="hidden", name="_method", value="PUT")
+            form(action=`/actualizar/${producto.id}`, method="POST")
               .mb-3 
                 label(for="nombre").form-label Nombre 
                 input(type="text", name="nombre", id="nombre", class="form-control form-control-lg", value= producto ? producto.nombre : '', placeholder="Ingrese el nombre del producto")

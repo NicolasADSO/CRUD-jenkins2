@@ -15,7 +15,7 @@ import session from 'express-session';
 import indexRouter from './routes/index.js';
 import usersRouter  from './routes/users.js';
 import flashMiddleware from './middlewares/flashesMiddleware.js';
-import methodOverride from './middlewares/methodOverride.js';
+
 
 
 // Variables.
@@ -33,7 +33,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(methodOverride)
 app.use(session({
   secret: 'Ancasa0719',
   resave: false,
@@ -67,3 +66,10 @@ app.use(function(err, req, res, next) {
 });
 
 export default app;
+
+if (process.env.NODE_ENV !== 'test') {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`🚀 Servidor corriendo en puerto ${port}`);
+  });
+}

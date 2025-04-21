@@ -1,41 +1,33 @@
 pipeline {
-    agent any
+  agent any
 
-    environment {
-        COMPOSE_PROJECT_NAME = 'tienda_crud'
+  stages {
+    stage('Clonar repositorio') {
+      steps {
+        echo '📥 Código clonado automáticamente por Jenkins'
+      }
     }
 
-    stages {
-        stage('Clonar repositorio') {
-            steps {
-                git credentialsId: 'github-token-id', url: 'https://github.com/NicolasADSO/CRUD.git', branch: 'main'
-            }
-        }
-
-        stage('Construir imagen Docker') {
-            steps {
-                sh 'docker build -t tienda-app .'
-            }
-        }
-
-        stage('Test (opcional)') {
-            steps {
-                // Cambia esto según cómo ejecutes los tests
-                sh 'echo "No hay tests definidos aún"' 
-            }
-        }
-
-        stage('Levantar contenedores') {
-            steps {
-                sh 'docker-compose down || true'
-                sh 'docker-compose up -d --build'
-            }
-        }
+    stage('Construir imagen Docker') {
+      steps {
+        sh 'docker-compose build'
+      }
     }
 
-    post {
-        always {
-            echo 'Pipeline finalizada'
-        }
+    stage('Reiniciar contenedores') {
+      steps {
+        sh 'docker-compose down'
+        sh 'docker-compose up -d'
+      }
     }
+  }
+
+  post {
+    success {
+      echo '✅ Despliegue exitoso'
+    }
+    failure {
+      echo '❌ Algo falló en el pipeline'
+    }
+  }
 }
