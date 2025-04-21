@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  environment {
+    COMPOSE_PROJECT_NAME = "tienda-crud"
+  }
+
   stages {
     stage('Clonar repositorio') {
       steps {
@@ -16,7 +20,11 @@ pipeline {
 
     stage('Reiniciar contenedores') {
       steps {
-        sh 'docker compose rm -sf'
+        // Elimina contenedores existentes si están en uso
+        sh 'docker rm -f mysql_db || true'
+        sh 'docker rm -f app_3000 || true'
+        sh 'docker rm -f app_4000 || true'
+
         sh 'docker compose down'
         sh 'docker compose up -d'
       }
