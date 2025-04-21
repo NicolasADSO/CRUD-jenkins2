@@ -16,6 +16,7 @@ pipeline {
 
     stage('Reiniciar contenedores') {
       steps {
+        sh 'docker compose rm -sf'
         sh 'docker compose down'
         sh 'docker compose up -d'
       }
