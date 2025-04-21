@@ -10,14 +10,14 @@ pipeline {
 
     stage('Construir imagen Docker') {
       steps {
-        sh 'docker-compose build'
+        sh 'docker compose build'
       }
     }
 
     stage('Reiniciar contenedores') {
       steps {
-        sh 'docker-compose down'
-        sh 'docker-compose up -d'
+        sh 'docker compose down'
+        sh 'docker compose up -d'
       }
     }
   }
