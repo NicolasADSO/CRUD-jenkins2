@@ -14,17 +14,15 @@ pipeline {
 
     stage('Construir imagen Docker') {
       steps {
-        sh 'docker compose build'
+        sh 'docker compose build --no-cache'
       }
     }
 
     stage('Reiniciar contenedores') {
       steps {
-        // Elimina contenedores existentes si están en uso
-        sh 'docker rm -f mysql_db || true'
         sh 'docker rm -f app_3000 || true'
         sh 'docker rm -f app_4000 || true'
-
+        sh 'docker rm -f mysql_db || true'
         sh 'docker compose down'
         sh 'docker compose up -d'
       }
