@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     container_name: app_3000
     restart: always
     ports:
@@ -21,7 +21,7 @@ services:
   app2:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     container_name: app_4000
     restart: always
     ports:

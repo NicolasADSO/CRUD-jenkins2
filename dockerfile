@@ -1,21 +1,21 @@
-# Usa una imagen base de Node.js
+# Imagen base
 FROM node:18
 
-# Crea y usa el directorio de la app
+# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia archivos de configuración
+# Copia solo los archivos necesarios primero
 COPY package*.json ./
 
 # Instala dependencias
 RUN npm install
 
-# Copia el resto de la aplicación
+# Copia el resto del código de tu app al contenedor
 COPY . .
 
-# Expone dos puertos
+# Expone los puertos para ambos servidores
 EXPOSE 3000
 EXPOSE 4000
 
-# Comando para ejecutar la app (puedes personalizar esto si usas nodemon o PM2)
+# Ejecuta la app principal
 CMD ["node", "app.js"]
