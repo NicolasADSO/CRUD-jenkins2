@@ -4,13 +4,15 @@ services:
   jenkins:
     build:
       context: ./jenkins-docker
+      dockerfile: Dockerfile
     container_name: jenkins_tienda
     ports:
-      - "8081:8080"
-      - "50000:50000"
+      - "8081:8080"         # Interfaz web de Jenkins
+      - "50000:50000"       # Conexiones remotas (opcional)
     volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins_home:/var/jenkins_home           # Datos persistentes de Jenkins
+      - /var/run/docker.sock:/var/run/docker.sock # Acceso al Docker host
+      - ./mysql-data:/var/lib/mysql              # Compartir volumen de base de datos con apps
     user: root
 
 volumes:

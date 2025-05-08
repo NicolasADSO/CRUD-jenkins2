@@ -14,17 +14,17 @@ pipeline {
 
     stage('Construir imagen Docker') {
       steps {
-        sh 'docker compose build --no-cache'
+        echo '🐳 Construyendo app_3000 y app_4000 sin tocar la base de datos'
+        sh 'docker compose build --no-cache app app2'
       }
     }
 
-    stage('Reiniciar contenedores') {
+    stage('Reiniciar servicios de la app') {
       steps {
-        sh 'docker rm -f app_3000 || true'
-        sh 'docker rm -f app_4000 || true'
-        sh 'docker rm -f mysql_db || true'
-        sh 'docker compose down'
-        sh 'docker compose up -d'
+        echo '🔁 Reiniciando app_3000 y app_4000 sin borrar la base de datos'
+        sh 'docker compose stop app app2 || true'
+        sh 'docker compose rm -f app app2 || true'
+        sh 'docker compose up -d app app2'
       }
     }
   }

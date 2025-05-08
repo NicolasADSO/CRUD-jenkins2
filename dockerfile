@@ -1,21 +1,22 @@
 # Imagen base
 FROM node:18
 
-# Directorio de trabajo dentro del contenedor
+# Directorio de trabajo
 WORKDIR /app
 
-# Copia solo los archivos necesarios primero
+# Copia e instala dependencias
 COPY package*.json ./
-
-# Instala dependencias
 RUN npm install
 
-# Copia el resto del código de tu app al contenedor
+# Copia el resto del código (incluye .env)
 COPY . .
 
-# Expone los puertos para ambos servidores
+# ⚠️ Borra el .env dentro del contenedor
+RUN rm -f .env
+
+# Expone los puertos
 EXPOSE 3000
 EXPOSE 4000
 
-# Ejecuta la app principal
+# Ejecuta la app
 CMD ["node", "app.js"]

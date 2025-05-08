@@ -24,6 +24,9 @@ services:
     ports:
       - "4000:4000"
     env_file: .env
+    environment:
+      - PORT=4000
+      - NODE_ENV=development
     command: ["node", "app.js"]
     depends_on:
       db:
@@ -40,12 +43,9 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - db_data:/var/lib/mysql
+      - ./mysql-data:/var/lib/mysql   # ✅ persistencia con carpeta local
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
       timeout: 10s
       retries: 10
-
-volumes:
-  db_data:
