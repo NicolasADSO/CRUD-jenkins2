@@ -54,6 +54,7 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+mysql-data/
 
 
 # next.js build output
